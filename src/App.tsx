@@ -15,8 +15,29 @@ const newRow = () => {
     length: "",
   };
 };
+
+const copyToClipboard = (val: string) => {
+  /**
+   * navigator.clipboard.writeText VDI 안 edge 에선 안됨...
+   */
+  try {
+    const t = document.createElement('textarea');
+    const copyarea = document.getElementById('copyarea');
+    if (copyarea) {
+      copyarea.appendChild(t);
+      t.value = val;
+      t.select();
+      document.execCommand('copy');
+      copyarea.removeChild(t);
+    }
+
+    alert('복사 되었습니다..');
+  } catch (e) {
+    console.error('copyToClipboard', e);
+  }
+};
+
 function App() {
-  const [count, setCount] = useState(0);
   const [javaCode, setJavaCode] = useState("");
   const strToEndStr = (strStart: string) => {
     const list = strStart.split("\n");
@@ -138,7 +159,7 @@ function App() {
                   console.log("Content copied to clipboard");
                 })
                 .catch((error) => {
-                  alert(error+" error");
+                  copyToClipboard(endResult)
                   console.error("Failed to copy: ", error);
                 })
             }
@@ -148,18 +169,7 @@ function App() {
         </div>
         <pre>{endResult}</pre>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      
     </>
   );
 }
