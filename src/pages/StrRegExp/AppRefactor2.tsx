@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import "./App.css";
 
 /**
  * chatGPT 에 요청해서 받은 코드
@@ -182,7 +181,7 @@ function App() {
           rows={30}
           cols={150}
           onChange={(e) => setJavaCode(e.target.value)}
-          value={javaCode}
+          defaultValue={javaCode}
         />
         <div style={{ display: "flex", justifyContent: 'space-evenly' }}>
           <button onClick={() => navigatorClipboardWrite(endResult)}>

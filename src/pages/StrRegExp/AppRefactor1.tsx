@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import "./App.css";
+
 
 /**
  * 이전 App.tsx으로 chatGPT 에 요청해서 받은 코드
@@ -114,7 +114,7 @@ function App() {
           rows={50}
           cols={150}
           onChange={(e) => setJavaCode(e.target.value)}
-          value={javaCode}
+          defaultValue={javaCode}
         />
         <div>
           <button
