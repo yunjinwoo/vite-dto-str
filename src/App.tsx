@@ -1,15 +1,21 @@
+/**
+ * https://dev.to/franciscomendes10866/file-based-routing-using-vite-and-react-router-3fdo
+ * https://velog.io/@developer-sora/TIL-React-Vite에서-next.js처럼-라우팅하기feat.typescript
+ * //import "./App.css";
+ * */
+
 import {
   createBrowserRouter,
   RouterProvider,
   LoaderFunction,
   ActionFunction,
 } from "react-router-dom";
-//import "./App.css";
+
 
 interface RouteCommon {
   loader?: LoaderFunction;
   action?: ActionFunction;
-  ErrorBoundary?: React.ComponentType<any>; // any 는 안되네?
+  ErrorBoundary?: React.ComponentType<any>;
 }
 
 interface IRoute extends RouteCommon {
