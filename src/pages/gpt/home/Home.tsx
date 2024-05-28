@@ -1,5 +1,5 @@
 import React from "react";
-import LayoutGPT from "../../widgets/gpt/LayoutGPT";
+import LayoutGPT from "../../../widgets/gpt/LayoutGPT";
 const Home: React.FC = () => {
   return (
     <LayoutGPT>

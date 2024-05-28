@@ -1,0 +1,106 @@
+import React, { useState, useEffect } from "react";
+import { db } from "../../../firebase";
+import { addDoc, collection, getDocs, onSnapshot } from "firebase/firestore";
+import LayoutGPT from "../../../widgets/gpt/LayoutGPT";
+
+동작이 안된다...
+react 만으로는 안되는듯....
+react - server 나  node 일때만 되나??...
+
+
+
+interface Post {
+  id: string;
+  title: string;
+  content: string;
+}
+
+const Community: React.FC = () => {
+  const [posts, setPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    /*
+    //chatgpt
+    const unsubscribe = onSnapshot(collection(db, "posts"), (snapshot) => {
+      const postsData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Post[];
+      setPosts(postsData);
+      setLoading(false);
+    });
+
+    return () => unsubscribe(); */
+
+    // Get a list of cities from your database
+    console.log("useEffect start 1 ");
+    async function getCities() {
+      console.log("useEffect start 2 ");
+      const citiesCol = collection(db, "posts");
+      const citySnapshot = await getDocs(citiesCol);
+      const cityList = citySnapshot.docs.map((doc) => {
+        console.log(doc);
+        return doc.data();
+      });
+      console.log("cityList 1", cityList);
+      console.log("cityList 2", citiesCol, db);
+      setPosts(cityList);
+      setLoading(false);
+      //return cityList;
+    }
+    return () => {
+      getCities();
+    };
+  }, []);
+
+  const testAddData = async () => {
+    console.log("testAddData");
+    try {
+      const docRef = await addDoc(collection(db, "posts"), {
+        title: "Ada",
+        content: "Lovelace",
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
+
+  const testAddData2 = async () => {
+    console.log("testAddData2");
+        
+    try {
+      const docRef = await addDoc(collection(db, "users"), {
+        first: "Ada",
+        last: "Lovelace",
+        born: 1815
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+
+  };
+
+  return (
+    <LayoutGPT>
+      <div>
+        <h1>Community</h1>
+        <button onClick={() => testAddData()}>test add data</button>
+        <button onClick={() => testAddData2()}>test2 add data</button>
+
+        {loading && <div>Loading...</div>}
+        {!loading &&
+          posts.map((post) => (
+            <div key={post.id}>
+              <h2>{post.title}</h2>
+              <p>{post.content}</p>
+            </div>
+          ))}
+      </div>
+    </LayoutGPT>
+  );
+};
+
+export default Community;
