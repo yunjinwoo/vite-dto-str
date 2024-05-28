@@ -5,7 +5,7 @@
 .components-content {
   flex: 1;
   padding: 1rem;
-  margin-left: 220px; /* 사이드 메뉴 너비를 고려한 마진 */
+  margin-left: 250px; /* 사이드 메뉴 너비를 고려한 마진 */
 }
 
 .button-group {

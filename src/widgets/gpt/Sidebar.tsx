@@ -27,7 +27,6 @@ const Sidebar: React.FC = () => {
         
         {/* 추가적인 UI 요소들을 여기에 추가합니다 */}
       </ul>
-      <BentoMenuSample /> 
     </div>
   );
 };

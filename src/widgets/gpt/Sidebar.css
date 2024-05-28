@@ -3,7 +3,8 @@
     padding: 1rem;
     background-color: #f4f4f4;
     border-right: 1px solid #ddd;
-    height: 100vh; /* 전체 높이 설정 */
+    /* 전체 높이 설정 height: 100vh;  */
+    height: calc(100vh - 200px);
     position: fixed; /* 고정 위치 */
     overflow-y: auto; /* 내용이 많을 때 스크롤 가능 */
   }
