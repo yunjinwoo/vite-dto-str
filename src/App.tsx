@@ -4,13 +4,13 @@
  * //import "./App.css";
  * */
 
+import Components from "@pages/gpt/components";
 import {
   createBrowserRouter,
   RouterProvider,
   LoaderFunction,
   ActionFunction,
 } from "react-router-dom";
-
 
 interface RouteCommon {
   loader?: LoaderFunction;
@@ -49,6 +49,10 @@ for (const path of Object.keys(pages)) {
     ErrorBoundary: pages[path]?.ErrorBoundary,
   });
 }
+
+
+routes.push({ path: "/gpt/components/*", Element: Components });
+
 
 const router = createBrowserRouter(
   routes.map(({ Element, ErrorBoundary, ...rest }) => ({

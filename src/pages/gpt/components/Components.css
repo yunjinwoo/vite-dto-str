@@ -1,16 +1,15 @@
 .components-page {
-    padding: 1rem;
-  }
-  
-  .components-page h1 {
-    margin-bottom: 1rem;
-  }
-  
-  .components-page section {
-    margin-bottom: 2rem;
-  }
-  
-  .components-page h2 {
-    margin-bottom: 0.5rem;
-  }
-  
+  display: flex;
+}
+
+.components-content {
+  flex: 1;
+  padding: 1rem;
+  margin-left: 220px; /* 사이드 메뉴 너비를 고려한 마진 */
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}

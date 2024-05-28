@@ -1,0 +1,41 @@
+.bento-menu {
+    display: grid;
+    width:80vh;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 16px;
+    margin-left: 220px; /* 사이드 메뉴 너비를 고려한 마진 */
+  }
+  
+  .bento-menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .bento-menu-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bento-menu-icon {
+    font-size: 48px;
+    margin-bottom: 8px;
+  }
+  
+  .bento-menu-content h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+  }
+  
+  .bento-menu-content p {
+    margin: 0;
+    text-align: center;
+  }
+  

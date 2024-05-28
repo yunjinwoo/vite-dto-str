@@ -1,0 +1,26 @@
+/* 기본 버튼 스타일 */
+.MuiButton-root {
+    font-family: 'Roboto', sans-serif;
+    text-transform: none;
+    border-radius: 8px;
+  }
+  
+  /* 커스텀 스타일 */
+  .custom-button-primary {
+    background-color: #1976d2;
+    color: white;
+  }
+  
+  .custom-button-primary:hover {
+    background-color: #115293;
+  }
+  
+  .custom-button-secondary {
+    background-color: #dc004e;
+    color: white;
+  }
+  
+  .custom-button-secondary:hover {
+    background-color: #9a0036;
+  }
+  

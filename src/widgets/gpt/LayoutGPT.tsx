@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Layout.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Layout.css";
+import Sidebar from "./Sidebar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,15 +13,28 @@ const LayoutGPT: React.FC<LayoutProps> = ({ children }) => {
       <header className="layout-header">
         <nav className="layout-nav">
           <ul>
-            <li><Link to="/">vite</Link></li>
-            <li><Link to="/gpt">Home</Link></li>
-            <li><Link to="/gpt/components">Components</Link></li>
-            <li><Link to="/gpt/documentation">Documentation</Link></li>
-            <li><Link to="/gpt/community">Community</Link></li>
-            <li><Link to="/gpt/blog">Blog</Link></li>
+            <li>
+              <Link to="/">vite</Link>
+            </li>
+            <li>
+              <Link to="/gpt">Home</Link>
+            </li>
+            <li>
+              <Link to="/gpt/components">Components</Link>
+            </li>
+            <li>
+              <Link to="/gpt/documentation">Documentation</Link>
+            </li>
+            <li>
+              <Link to="/gpt/community">Community</Link>
+            </li>
+            <li>
+              <Link to="/gpt/blog">Blog</Link>
+            </li>
           </ul>
         </nav>
       </header>
+
       <main className="layout-main">
         {children}
       </main>
