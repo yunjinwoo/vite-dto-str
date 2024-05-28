@@ -2,7 +2,7 @@
 
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Layout from "./Layout";
+import Layout from "../widgets/Layout";
 
 
 

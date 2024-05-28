@@ -28,11 +28,11 @@ export const MainListItems = () => {
         </ListItemIcon>
         <ListItemText primary="StrRegExp" />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton onClick={() => navigate("/gpt")}>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
-        <ListItemText primary="Customers" />
+        <ListItemText primary="GPT Test" />
       </ListItemButton>
       <ListItemButton>
         <ListItemIcon>

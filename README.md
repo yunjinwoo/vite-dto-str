@@ -28,3 +28,45 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+```
+vite-project
+├─ .eslintrc.cjs
+├─ index.html
+├─ package-lock.json
+├─ package.json
+├─ public
+│  └─ vite.svg
+├─ README.md
+├─ src
+│  ├─ App.css
+│  ├─ App.tsx
+│  ├─ assets
+│  │  └─ react.svg
+│  ├─ features
+│  │  └─ StrRegExp
+│  │     ├─ AppRefactor1.tsx
+│  │     ├─ AppRefactor2.tsx
+│  │     ├─ ButtonTestCode.tsx
+│  │     └─ StrRegExp.tsx
+│  ├─ index.css
+│  ├─ main.tsx
+│  ├─ pages
+│  │  ├─ index.tsx
+│  │  ├─ Layout.tsx
+│  │  ├─ ListItem.tsx
+│  │  └─ StrRegExp
+│  │     ├─ AppRefactor1.tsx
+│  │     ├─ AppRefactor2.tsx
+│  │     └─ index.tsx
+│  ├─ shared
+│  │  └─ RouterButton.tsx
+│  ├─ utils
+│  │  ├─ navigatorClipboardWrite.ts
+│  │  └─ Str.ts
+│  └─ vite-env.d.ts
+├─ tsconfig.json
+├─ tsconfig.node.json
+└─ vite.config.ts
+
+```

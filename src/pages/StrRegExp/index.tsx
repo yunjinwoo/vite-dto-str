@@ -1,5 +1,5 @@
 import StrRegExp from "../../features/StrRegExp/StrRegExp";
-import Layout from "../Layout";
+import Layout from "../../widgets/Layout";
 
 const Index = () => (
   <Layout>

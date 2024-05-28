@@ -1,5 +1,5 @@
 import AppRefactor1 from "../../features/StrRegExp/AppRefactor1";
-import Layout from "../Layout";
+import Layout from "../../widgets/Layout";
 
 const Index = () => (
   <Layout>
