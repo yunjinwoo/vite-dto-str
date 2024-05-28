@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import LayoutGPT from "../../../widgets/gpt/LayoutGPT";
+import LayoutGPT from "@widgets/gpt/LayoutGPT";
 import { doc, collection, getDocs, onSnapshot, getDoc } from 'firebase/firestore';
-import { db } from '../../../firebase';
+import { db } from '@/firebase';
 
 interface Post {
   id: string;

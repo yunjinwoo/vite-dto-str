@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./Components.css";
-import Button from "../../../shared/gpt/Button/Button";
-import Modal from "../../../shared/gpt/Modal/Modal";
-import LayoutGPT from "../../../widgets/gpt/LayoutGPT";
+import Button from "@shared/gpt/Button/Button";
+import Modal from "@shared/gpt/Modal/Modal";
+import LayoutGPT from "@widgets/gpt/LayoutGPT";
 
 const Components: React.FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);

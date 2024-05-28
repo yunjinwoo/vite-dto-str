@@ -1,7 +1,7 @@
 // src/pages/Documentation.tsx
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import LayoutGPT from "../../../widgets/gpt/LayoutGPT";
+import LayoutGPT from "@widgets/gpt/LayoutGPT";
 
 const markdown = `
 # Documentation

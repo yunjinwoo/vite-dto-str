@@ -1,8 +1,8 @@
-import StrRegExp from "../../features/StrRegExp/StrRegExp";
-import Layout from "../../widgets/Layout";
+import StrRegExp from "@features/StrRegExp/StrRegExp";
+import Layout from "@widgets/Layout";
 
 const Index = () => (
-  <Layout>
+  <Layout title="StrRegExp">
     <StrRegExp />
   </Layout>
 );

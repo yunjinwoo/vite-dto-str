@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { navigatorClipboardWrite } from "../../utils/navigatorClipboardWrite";
+import { navigatorClipboardWrite } from "@utils/navigatorClipboardWrite";
 
 /**
  * 이전 App.tsx으로 chatGPT 에 요청해서 받은 코드

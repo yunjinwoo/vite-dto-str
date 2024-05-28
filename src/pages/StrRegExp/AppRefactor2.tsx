@@ -1,8 +1,8 @@
-import AppRefactor2 from "../../features/StrRegExp/AppRefactor2";
-import Layout from "../../widgets/Layout";
+import AppRefactor2 from "@features/StrRegExp/AppRefactor2";
+import Layout from "@widgets/Layout";
 
 const Index = () => (
-  <Layout>
+  <Layout title="AppRefactor2">
     <AppRefactor2 />
   </Layout>
 );

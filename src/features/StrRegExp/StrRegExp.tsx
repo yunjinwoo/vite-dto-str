@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
-import { RouterButton } from "../../shared/RouterButton";
-import { Str } from "../../utils/Str";
-import { navigatorClipboardWrite } from "../../utils/navigatorClipboardWrite";
+import { RouterButton } from "@shared/RouterButton";
+
+import { navigatorClipboardWrite } from "@utils/navigatorClipboardWrite";
 import ButtonTestCode from "./ButtonTestCode";
+import { Str } from "@utils/Str";
 
 interface Row {
   field_info: string;

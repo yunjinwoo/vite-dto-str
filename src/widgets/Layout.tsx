@@ -94,7 +94,11 @@ const Drawer = styled(MuiDrawer, {
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function Layout({ children }: React.PropsWithChildren<unknown>) {
+
+interface Props{
+  title?:string
+}
+export default function Layout({ children , title="Dashboard"}: React.PropsWithChildren<Props>) {
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -129,7 +133,7 @@ export default function Layout({ children }: React.PropsWithChildren<unknown>) {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              {title}
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
