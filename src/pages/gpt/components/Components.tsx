@@ -10,19 +10,29 @@ import BentoMenuSample from "@features/gpt/BentoMenu";
 import BreadcrumbSample from "@features/gpt/Breadcrumb";
 import ButtonShowcase from "@features/gpt/Button";
 import DropdownShowcase from "@features/gpt/Dropdown";
+import { uiElements } from "@features/gpt/uiElements";
 
 const Components: React.FC = () => {
-
   return (
     <LayoutGPT>
       <Sidebar />
       <div className="components-page">
         <div className="components-content">
-          
-        
           <h1>UI Components</h1>
           <BreadcrumbSample />
+
           <Routes>
+            {uiElements.map((element) => (
+              <Route
+                key={element.path}
+                path={element.path}
+                element={element.component}
+              />
+            ))}
+            <Route path="/" element={<BentoMenuSample />} />
+          </Routes>
+
+          {/* <Routes>
             <Route path="accordion" element={<AccordionSample />} />
             <Route path="ButtonShowcase" element={<ButtonShowcase />} />
             <Route
@@ -37,9 +47,8 @@ const Components: React.FC = () => {
             <Route path="modal" element={<ModalTest />} />
             <Route path="BentoMenu" element={<BentoMenuSample />} />
             <Route path="DropdownShowcase" element={<DropdownShowcase />} />
-             
-            {/* 추가적인 라우트를 여기에 추가합니다 */}
-          </Routes>
+
+          </Routes> */}
         </div>
       </div>
     </LayoutGPT>

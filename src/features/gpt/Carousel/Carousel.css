@@ -1,0 +1,31 @@
+  .carousel-item {
+    position: relative;
+    text-align: center;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .carousel-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .slick-slide {    
+    background-color: cadetblue;
+  }
+  .slick-slide.slick-center {    
+    background-color: rgb(12, 78, 80);
+  }
+  .slick-arrow {
+    
+    background-color: cadetblue;
+  }

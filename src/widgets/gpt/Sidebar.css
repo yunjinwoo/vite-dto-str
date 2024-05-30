@@ -1,33 +1,38 @@
 .sidebar {
-    width: 200px; /* 고정 너비 설정 */
-    padding: 1rem;
-    background-color: #f4f4f4;
-    border-right: 1px solid #ddd;
-    /* 전체 높이 설정 height: 100vh;  */
-    height: calc(100vh - 200px);
-    position: fixed; /* 고정 위치 */
-    overflow-y: auto; /* 내용이 많을 때 스크롤 가능 */
-  }
-  
-  .sidebar h2 {
-    margin-top: 0;
-  }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
-  
-  .sidebar ul li {
-    margin-bottom: 0.5rem;
-  }
-  
-  .sidebar ul li a {
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .sidebar ul li a:hover {
-    text-decoration: underline;
-  }
-  
+  width: 200px; /* 고정 너비 설정 */
+  padding: 1rem;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+  height: calc(100vh - 200px); /* 전체 높이 설정 */
+  position: fixed; /* 고정 위치 */
+  overflow-y: auto; /* 내용이 많을 때 스크롤 가능 */
+}
+
+.sidebar h2 {
+  margin-top: 0;
+}
+
+.sidebar ul, .sidebar ol {
+  padding-left: 20px; /* 목록 들여쓰기 */
+}
+
+.sidebar ul {
+  list-style-type: disc; /* 점 목록 스타일 */
+}
+
+.sidebar ol {
+  list-style-type: decimal; /* 숫자 목록 스타일 */
+}
+
+.sidebar ul li, .sidebar ol li {
+  margin-bottom: 0.5rem;
+}
+
+.sidebar ul li a, .sidebar ol li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.sidebar ul li a:hover, .sidebar ol li a:hover {
+  text-decoration: underline;
+}

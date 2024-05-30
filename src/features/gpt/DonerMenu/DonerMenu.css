@@ -1,0 +1,12 @@
+.doner-icon path {
+  d: path("M3 6h18M3 12h12M3 18h6");
+}
+
+.doner-icon {
+  transform: rotate(0deg);
+  transition: transform 0.3s;
+}
+
+.doner-icon.open {
+  transform: rotate(90deg);
+}
