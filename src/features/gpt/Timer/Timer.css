@@ -23,3 +23,8 @@
     text-align: left;
   }
   
+  .timer strong {
+    font-weight: bold;
+    color: red;
+  }
+  

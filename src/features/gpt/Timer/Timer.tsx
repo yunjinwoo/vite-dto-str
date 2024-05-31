@@ -51,12 +51,12 @@ const Timer: React.FC = () => {
 
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds
       .toString()
-      .padStart(2, '0')}.${ms.toString().padStart(3, '0')}`;
+      .padStart(2, '0')}.<strong>${ms.toString().padStart(3, '0')}</strong>`;
   };
 
   return (
     <div className="timer">
-      <h1>{formatTime(time)}</h1>
+      <h1 dangerouslySetInnerHTML={{ __html: formatTime(time) }} />
       <Stack direction="row" spacing={2} justifyContent="center">
         <Button variant="contained" color="primary" onClick={handleStartStop} disabled={records.length >= 5}>
           {running ? 'Stop' : 'Start'}
@@ -68,7 +68,9 @@ const Timer: React.FC = () => {
       <List>
         {records.map((record, index) => (
           <ListItem key={index}>
-            <ListItemText primary={`Record ${index + 1}: ${formatTime(record)}`} />
+            <ListItemText
+              primary={<span dangerouslySetInnerHTML={{ __html: `Record ${index + 1}: ${formatTime(record)}` }} />}
+            />
           </ListItem>
         ))}
       </List>
