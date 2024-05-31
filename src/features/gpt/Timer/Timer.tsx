@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, List, ListItem, ListItemText } from '@mui/material';
+import { Button, List, ListItem, ListItemText, Stack } from '@mui/material';
 import './Timer.css';
 
 const Timer: React.FC = () => {
@@ -24,9 +24,22 @@ const Timer: React.FC = () => {
   const handleStartStop = () => {
     if (running) {
       setRunning(false);
-      setRecords([...records, time]);
+      if (records.length < 5) {
+        setRecords([...records, time]);
+      }
     } else {
-      setRunning(true);
+      if (records.length < 5) {
+        setRunning(true);
+      }
+    }
+  };
+
+  const handleReset = () => {
+    setTime(0);
+    setRecords([]);
+    setRunning(false);
+    if (intervalId) {
+      clearInterval(intervalId);
     }
   };
 
@@ -44,9 +57,14 @@ const Timer: React.FC = () => {
   return (
     <div className="timer">
       <h1>{formatTime(time)}</h1>
-      <Button variant="contained" color="primary" onClick={handleStartStop}>
-        {running ? 'Stop' : 'Start'}
-      </Button>
+      <Stack direction="row" spacing={2} justifyContent="center">
+        <Button variant="contained" color="primary" onClick={handleStartStop} disabled={records.length >= 5}>
+          {running ? 'Stop' : 'Start'}
+        </Button>
+        <Button variant="contained" color="secondary" onClick={handleReset}>
+          Reset
+        </Button>
+      </Stack>
       <List>
         {records.map((record, index) => (
           <ListItem key={index}>
