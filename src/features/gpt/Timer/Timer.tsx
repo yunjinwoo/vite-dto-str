@@ -7,7 +7,7 @@ const Timer: React.FC = () => {
   const [running, setRunning] = useState(false);
   const [records, setRecords] = useState<number[]>([]);
   const [intervalId, setIntervalId] = useState<number | null>(null);
-  const [maxRecord, setMaxRecord] = useState<number | null>(null);
+  const [minRecords, setMinRecords] = useState<number[]>([]);
 
   const formatTime = useCallback((milliseconds: number, emphasizeMs: boolean = false) => {
     const ms = milliseconds % 1000;
@@ -55,8 +55,11 @@ const Timer: React.FC = () => {
 
   const handleReset = () => {
     if (records.length > 0) {
-      const max = Math.max(...records);
-      setMaxRecord(max);
+      const min = Math.min(...records);
+      setMinRecords((prevMinRecords) => {
+        const newMinRecords = [...prevMinRecords, min];
+        return newMinRecords.sort((a, b) => a - b);
+      });
     }
     setTime(0);
     setRecords([]);
@@ -69,7 +72,7 @@ const Timer: React.FC = () => {
 
   return (
     <div className="timer">
-      <h1 dangerouslySetInnerHTML={{ __html: formatTime(time) }} />
+      <h1>{formatTime(time)}</h1>
       <Stack direction="row" spacing={2} justifyContent="center">
         <Button variant="contained" color="primary" onClick={handleStartStop} disabled={records.length >= 5}>
           {running ? 'Stop' : 'Start'}
@@ -87,10 +90,21 @@ const Timer: React.FC = () => {
           </ListItem>
         ))}
       </List>
-      {maxRecord !== null && (
-        <Typography variant="h6" className="max-record">
-          Max Record: <span dangerouslySetInnerHTML={{ __html: formatTime(maxRecord, true) }} />
-        </Typography>
+      {minRecords.length > 0 && (
+        <div>
+          <Typography variant="h6" className="min-record">
+            Min Records:
+          </Typography>
+          <List>
+            {minRecords.map((record, index) => (
+              <ListItem key={index}>
+                <ListItemText
+                  primary={<span dangerouslySetInnerHTML={{ __html: `Min Record ${index + 1}: ${formatTime(record, true)}` }} />}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </div>
       )}
     </div>
   );
