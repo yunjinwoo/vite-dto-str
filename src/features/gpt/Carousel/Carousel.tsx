@@ -9,13 +9,13 @@ interface CarouselProps {
 }
 
 const Carousel: React.FC<CarouselProps> = ({ items }) => {
-  const settings = {
+  /* const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-  };
+  }; */
 
   const settings2 = {
     className: "center",

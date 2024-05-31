@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Drawer, IconButton, List, ListItem, ListItemText } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import './DonerMenu.css';
 import { Reorder } from '@mui/icons-material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Drawer, IconButton, List, ListItem, ListItemText } from '@mui/material';
+import React, { useState } from 'react';
+import './DonerMenu.css';
 
 const DonerMenu: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -23,7 +23,7 @@ const DonerMenu: React.FC = () => {
       </IconButton>
       <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
         <List>
-          {menuItems.map((text, index) => (
+          {menuItems.map((text) => (
             <ListItem button key={text}>
               <ListItemText primary={text} />
             </ListItem>

@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Layout.css";
-import Sidebar from "./Sidebar";
 
 interface LayoutProps {
   children: React.ReactNode;

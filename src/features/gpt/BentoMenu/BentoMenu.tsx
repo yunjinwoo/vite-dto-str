@@ -1,6 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./BentoMenu.css";
-import { NavLink, useNavigate } from "react-router-dom";
 
 interface BentoMenuItem {
   title: string;
