@@ -1,13 +1,20 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Button, List, ListItem, ListItemText, Stack, Typography } from '@mui/material';
+import { Button, List, ListItem, ListItemText, Stack, Typography, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import './Timer.css';
+
+interface MinRecord {
+  time: number;
+  nickname: string;
+}
 
 const Timer: React.FC = () => {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   const [records, setRecords] = useState<number[]>([]);
   const [intervalId, setIntervalId] = useState<number | null>(null);
-  const [minRecords, setMinRecords] = useState<number[]>([]);
+  const [minRecords, setMinRecords] = useState<MinRecord[]>([]);
+  const [open, setOpen] = useState(false);
+  const [nickname, setNickname] = useState('');
 
   const formatTime = useCallback((milliseconds: number, emphasizeMs: boolean = false) => {
     const ms = milliseconds % 1000;
@@ -55,11 +62,12 @@ const Timer: React.FC = () => {
 
   const handleReset = () => {
     if (records.length > 0) {
-      const min = Math.min(...records);
+      const min = records.reduce((prev, curr) => (curr % 1000 < prev % 1000 ? curr : prev));
       setMinRecords((prevMinRecords) => {
-        const newMinRecords = [...prevMinRecords, min];
-        return newMinRecords.sort((a, b) => a - b);
+        const newMinRecords = [...prevMinRecords, { time: min, nickname: '' }];
+        return newMinRecords.sort((a, b) => (a.time % 1000) - (b.time % 1000));
       });
+      setOpen(true);
     }
     setTime(0);
     setRecords([]);
@@ -68,6 +76,25 @@ const Timer: React.FC = () => {
       clearInterval(intervalId);
       setIntervalId(null);
     }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleNicknameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNickname(event.target.value);
+  };
+
+  const handleSaveNickname = () => {
+    setMinRecords((prevMinRecords) => {
+      const lastIndex = prevMinRecords.length - 1;
+      const newMinRecords = [...prevMinRecords];
+      newMinRecords[lastIndex] = { ...newMinRecords[lastIndex], nickname };
+      return newMinRecords;
+    });
+    setNickname('');
+    setOpen(false);
   };
 
   return (
@@ -99,13 +126,35 @@ const Timer: React.FC = () => {
             {minRecords.map((record, index) => (
               <ListItem key={index}>
                 <ListItemText
-                  primary={<span dangerouslySetInnerHTML={{ __html: `Min Record ${index + 1}: ${formatTime(record, true)}` }} />}
+                  primary={<span dangerouslySetInnerHTML={{ __html: `Min Record ${index + 1}: ${formatTime(record.time, true)} ${record.nickname && `(${record.nickname})`}` }} />}
                 />
               </ListItem>
             ))}
           </List>
         </div>
       )}
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Enter Nickname for Minimum Record</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Nickname"
+            type="text"
+            fullWidth
+            value={nickname}
+            onChange={handleNicknameChange}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleSaveNickname} color="primary">
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
