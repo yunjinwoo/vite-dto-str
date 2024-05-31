@@ -6,7 +6,7 @@ const Timer: React.FC = () => {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   const [records, setRecords] = useState<number[]>([]);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
+  const [intervalId, setIntervalId] = useState<number | null>(null);
 
   const formatTime = useCallback((milliseconds: number, emphasizeMs: boolean = false) => {
     const ms = milliseconds % 1000;
@@ -24,15 +24,20 @@ const Timer: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    let id: number | null = null;
+
     if (running) {
       const start = Date.now() - time;
-      const id = setInterval(() => setTime(Date.now() - start), 1);
+      id = window.setInterval(() => setTime(Date.now() - start), 1);
       setIntervalId(id);
-      return () => clearInterval(id);
-    } else if (intervalId) {
-      clearInterval(intervalId);
     }
-  }, [running, time, intervalId]);
+
+    return () => {
+      if (id) {
+        clearInterval(id);
+      }
+    };
+  }, [running, time]);
 
   const handleStartStop = () => {
     if (running) {
@@ -53,6 +58,7 @@ const Timer: React.FC = () => {
     setRunning(false);
     if (intervalId) {
       clearInterval(intervalId);
+      setIntervalId(null);
     }
   };
 
