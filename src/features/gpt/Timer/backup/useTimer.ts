@@ -1,17 +1,11 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { Button, Stack } from '@mui/material';
-import './Timer.css';
-import TimerDisplay from './TimerDisplay';
-import RecordList from './RecordList';
-import MinRecordList from './MinRecordList';
-import NicknameDialog from './NicknameDialog';
+import { useState, useEffect, useCallback } from 'react';
 
 interface MinRecord {
   time: number;
   nickname: string;
 }
 
-const Timer: React.FC = () => {
+const useTimer = () => {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   const [records, setRecords] = useState<number[]>([]);
@@ -104,28 +98,20 @@ const Timer: React.FC = () => {
     setOpen(false);
   };
 
-  return (
-    <div className="timer">
-      <TimerDisplay time={time} formatTime={formatTime} />
-      <Stack direction="row" spacing={2} justifyContent="center">
-        <Button variant="contained" color="primary" onClick={handleStartStop} disabled={records.length >= 5}>
-          {running ? 'Stop' : 'Start'}
-        </Button>
-        <Button variant="contained" color="secondary" onClick={handleReset}>
-          Reset
-        </Button>
-      </Stack>
-      <RecordList records={records} formatTime={formatTime} />
-      <MinRecordList minRecords={minRecords} formatTime={formatTime} />
-      <NicknameDialog
-        open={open}
-        nickname={nickname}
-        onClose={handleClose}
-        onChange={handleNicknameChange}
-        onSave={handleSaveNickname}
-      />
-    </div>
-  );
+  return {
+    time,
+    running,
+    records,
+    minRecords,
+    open,
+    nickname,
+    formatTime,
+    handleStartStop,
+    handleReset,
+    handleClose,
+    handleNicknameChange,
+    handleSaveNickname,
+  };
 };
 
-export default Timer;
+export default useTimer;
