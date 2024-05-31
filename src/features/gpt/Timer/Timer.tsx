@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Button, List, ListItem, ListItemText, Stack } from '@mui/material';
+import { Button, List, ListItem, ListItemText, Stack, Typography } from '@mui/material';
 import './Timer.css';
 
 const Timer: React.FC = () => {
@@ -7,6 +7,7 @@ const Timer: React.FC = () => {
   const [running, setRunning] = useState(false);
   const [records, setRecords] = useState<number[]>([]);
   const [intervalId, setIntervalId] = useState<number | null>(null);
+  const [maxRecord, setMaxRecord] = useState<number | null>(null);
 
   const formatTime = useCallback((milliseconds: number, emphasizeMs: boolean = false) => {
     const ms = milliseconds % 1000;
@@ -53,6 +54,10 @@ const Timer: React.FC = () => {
   };
 
   const handleReset = () => {
+    if (records.length > 0) {
+      const max = Math.max(...records);
+      setMaxRecord(max);
+    }
     setTime(0);
     setRecords([]);
     setRunning(false);
@@ -82,6 +87,11 @@ const Timer: React.FC = () => {
           </ListItem>
         ))}
       </List>
+      {maxRecord !== null && (
+        <Typography variant="h6" className="max-record">
+          Max Record: <span dangerouslySetInnerHTML={{ __html: formatTime(maxRecord, true) }} />
+        </Typography>
+      )}
     </div>
   );
 };
