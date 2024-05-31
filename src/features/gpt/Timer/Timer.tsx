@@ -63,11 +63,14 @@ const Timer: React.FC = () => {
   const handleReset = () => {
     if (records.length > 0) {
       const min = records.reduce((prev, curr) => (curr % 1000 < prev % 1000 ? curr : prev));
+      const currentMinRecord = minRecords.length > 0 ? minRecords[0].time % 1000 : Infinity;
+      if (min % 1000 < currentMinRecord) {
+        setOpen(true);
+      }
       setMinRecords((prevMinRecords) => {
         const newMinRecords = [...prevMinRecords, { time: min, nickname: '' }];
         return newMinRecords.sort((a, b) => (a.time % 1000) - (b.time % 1000));
       });
-      setOpen(true);
     }
     setTime(0);
     setRecords([]);
@@ -80,6 +83,7 @@ const Timer: React.FC = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setMinRecords((prevMinRecords) => prevMinRecords.slice(0, -1)); // Remove the last empty record if canceled
   };
 
   const handleNicknameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,10 +92,9 @@ const Timer: React.FC = () => {
 
   const handleSaveNickname = () => {
     setMinRecords((prevMinRecords) => {
-      const lastIndex = prevMinRecords.length - 1;
-      const newMinRecords = [...prevMinRecords];
-      newMinRecords[lastIndex] = { ...newMinRecords[lastIndex], nickname };
-      return newMinRecords;
+      const newMinRecords = prevMinRecords.sort((a, b) => (a.time % 1000) - (b.time % 1000));
+      const appendNickRecords = [{ ...newMinRecords[0], nickname }, ...newMinRecords.slice(1)];
+      return appendNickRecords;
     });
     setNickname('');
     setOpen(false);
