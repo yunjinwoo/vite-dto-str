@@ -34,17 +34,17 @@ export const MainListItems = () => {
         </ListItemIcon>
         <ListItemText primary="GPT Test" />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton onClick={() => navigate("/overlay-kit")}>
         <ListItemIcon>
           <BarChartIcon />
         </ListItemIcon>
-        <ListItemText primary="Reports" />
+        <ListItemText primary="overlay-kit" />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton onClick={() => navigate("/sweetalert2")}>
         <ListItemIcon>
           <LayersIcon />
         </ListItemIcon>
-        <ListItemText primary="Integrations" />
+        <ListItemText primary="sweetalert2" />
       </ListItemButton>
     </React.Fragment>
   );
