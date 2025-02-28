@@ -46,6 +46,12 @@ export const MainListItems = () => {
         </ListItemIcon>
         <ListItemText primary="sweetalert2" />
       </ListItemButton>
+      <ListItemButton onClick={() => navigate("/sudoku")}>
+        <ListItemIcon>
+          <LayersIcon />
+        </ListItemIcon>
+        <ListItemText primary="sudoku" />
+      </ListItemButton>
     </React.Fragment>
   );
 };
