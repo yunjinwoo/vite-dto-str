@@ -39,6 +39,7 @@ function Example3() {
           });
         });
 
+        console.log('agreed - ', agreed)
         /*
          * 사용자가 "네"를 눌렀다면, `agreed` 는 `true`가 돼요.
          * 아니면, `agreed`는 `false`예요.
