@@ -1,6 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useState, useEffect } from "react";
-
+import { useState } from "react";
 
 const initialBoard = [
   [5, 3, null, null, 7, null, null, null, null],
