@@ -114,7 +114,10 @@ const WordGame = () => {
                     <Pagination
                         count={5} // 총 페이지 수
                         page={page}
-                        onChange={(event, value) => navigate('/word/game', { state: { page: value } })}
+                        onChange={(event, value) => {
+                            console.log('onChange event', event)
+                            navigate('/word/game', { state: { page: value } })
+                        }}
                     />
                 </Box>
             </Paper>

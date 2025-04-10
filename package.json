@@ -14,6 +14,8 @@
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.18",
     "@mui/material": "^5.15.18",
+    "@supabase/supabase-js": "^2.49.4",
+    "@tanstack/react-query": "^5.72.2",
     "@types/react-slick": "^0.23.13",
     "firebase": "^10.12.2",
     "gatsby": "^5.13.5",
@@ -27,7 +29,8 @@
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
     "slick-carousel": "^1.8.1",
-    "sweetalert2": "^11.15.10"
+    "sweetalert2": "^11.15.10",
+    "vite-project": "file:"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

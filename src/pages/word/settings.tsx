@@ -1,29 +1,29 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
-  Container,
-  Paper,
-  Typography,
   Button,
-  FormControlLabel,
-  Switch,
+  Container,
   FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
+  FormControlLabel,
   Grid,
-} from '@mui/material';
-import { GameSettings, Difficulty } from '../../features/word/types';
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  Switch,
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { GameSettings } from "../../features/word/types";
 
-const languages = ['한국어', 'English', '日本語', '中文'];
+const languages = ["한국어", "English", "日本語", "中文"];
 
 const Settings = () => {
   const navigate = useNavigate();
   const [settings, setSettings] = useState<GameSettings>({
     sound: true,
     music: true,
-    difficulty: 'medium',
-    language: '한국어',
+    difficulty: "medium",
+    language: "한국어",
   });
 
   const handleSettingChange = (key: keyof GameSettings, value: any) => {
@@ -46,7 +46,9 @@ const Settings = () => {
               control={
                 <Switch
                   checked={settings.sound}
-                  onChange={(e) => handleSettingChange('sound', e.target.checked)}
+                  onChange={(e) =>
+                    handleSettingChange("sound", e.target.checked)
+                  }
                 />
               }
               label="효과음"
@@ -58,7 +60,9 @@ const Settings = () => {
               control={
                 <Switch
                   checked={settings.music}
-                  onChange={(e) => handleSettingChange('music', e.target.checked)}
+                  onChange={(e) =>
+                    handleSettingChange("music", e.target.checked)
+                  }
                 />
               }
               label="배경음악"
@@ -70,7 +74,9 @@ const Settings = () => {
               <InputLabel>난이도</InputLabel>
               <Select
                 value={settings.difficulty}
-                onChange={(e) => handleSettingChange('difficulty', e.target.value)}
+                onChange={(e) =>
+                  handleSettingChange("difficulty", e.target.value)
+                }
                 label="난이도"
               >
                 <MenuItem value="easy">쉬움</MenuItem>
@@ -85,7 +91,9 @@ const Settings = () => {
               <InputLabel>언어</InputLabel>
               <Select
                 value={settings.language}
-                onChange={(e) => handleSettingChange('language', e.target.value)}
+                onChange={(e) =>
+                  handleSettingChange("language", e.target.value)
+                }
                 label="언어"
               >
                 {languages.map((lang) => (
@@ -102,7 +110,7 @@ const Settings = () => {
               variant="contained"
               color="primary"
               fullWidth
-              onClick={() => navigate('/word/home')}
+              onClick={() => navigate("/word/home")}
             >
               저장하고 돌아가기
             </Button>
@@ -113,4 +121,4 @@ const Settings = () => {
   );
 };
 
-export default Settings; 
+export default Settings;

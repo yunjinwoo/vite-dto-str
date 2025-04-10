@@ -1,5 +1,3 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 
 export interface WordDefinition {
   word: string;

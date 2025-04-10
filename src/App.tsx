@@ -6,18 +6,15 @@
 
 import Components from "@pages/gpt/components";
 import {
-  createBrowserRouter,
-  RouterProvider,
-  LoaderFunction,
-  ActionFunction,
-} from "react-router-dom";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
   QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+  QueryClientProvider
+} from "@tanstack/react-query";
+import {
+  ActionFunction,
+  createBrowserRouter,
+  LoaderFunction,
+  RouterProvider,
+} from "react-router-dom";
 
 interface RouteCommon {
   loader?: LoaderFunction;
@@ -67,15 +64,15 @@ const router = createBrowserRouter(
   }))
 );
 
-
-
 // Create a client
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 const App = () => {
-  return (<QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
-  </QueryClientProvider>);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  );
 };
 
 export default App;

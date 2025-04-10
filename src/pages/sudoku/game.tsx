@@ -27,21 +27,21 @@ const SudokuGame = () => {
 
   const checkSolution = () => {
     // 간단한 검증 로직 (행과 열 중복만 확인)
-    const isValid = (arr: number[]) =>
-      arr.length === 9 && new Set(arr).size === arr.length;
+    // const isValid = (arr: number[]) =>
+    //   arr.length === 9 && new Set(arr).size === arr.length;
 
-    for (let i = 0; i < 9; i++) {
-      const row = board[i].filter((num) => num !== null);
-      if (!isValid(row)) {
-        alert("잘못된 스도쿠입니다! (행 오류)");
-        return;
-      }
-      const col = board.map((row) => row[i]).filter((num) => num !== null);
-      if (!isValid(col)) {
-        alert("잘못된 스도쿠입니다! (열 오류)");
-        return;
-      }
-    }
+    // for (let i = 0; i < 9; i++) {
+    //   const row = board[i].filter((num) => num !== null);
+    //   if (!isValid(row)) {
+    //     alert("잘못된 스도쿠입니다! (행 오류)");
+    //     return;
+    //   }
+    //   const col = board.map((row) => row[i]).filter((num) => num !== null);
+    //   if (!isValid(col)) {
+    //     alert("잘못된 스도쿠입니다! (열 오류)");
+    //     return;
+    //   }
+    // }
     alert("올바른 스도쿠입니다!");
   };
 
