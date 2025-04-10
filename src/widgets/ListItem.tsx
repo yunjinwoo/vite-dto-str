@@ -1,3 +1,4 @@
+import { ArrowDropDownCircleOutlined, BorderOuter } from "@mui/icons-material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -48,9 +49,15 @@ export const MainListItems = () => {
       </ListItemButton>
       <ListItemButton onClick={() => navigate("/sudoku")}>
         <ListItemIcon>
-          <LayersIcon />
+          <BorderOuter />
         </ListItemIcon>
         <ListItemText primary="sudoku" />
+      </ListItemButton>
+      <ListItemButton onClick={() => navigate("/word")}>
+        <ListItemIcon>
+          <ArrowDropDownCircleOutlined />
+        </ListItemIcon>
+        <ListItemText primary="word" />
       </ListItemButton>
     </React.Fragment>
   );

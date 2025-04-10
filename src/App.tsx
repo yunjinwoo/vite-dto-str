@@ -11,6 +11,13 @@ import {
   LoaderFunction,
   ActionFunction,
 } from "react-router-dom";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
 interface RouteCommon {
   loader?: LoaderFunction;
@@ -50,9 +57,7 @@ for (const path of Object.keys(pages)) {
   });
 }
 
-
 routes.push({ path: "/gpt/components/*", Element: Components });
-
 
 const router = createBrowserRouter(
   routes.map(({ Element, ErrorBoundary, ...rest }) => ({
@@ -62,8 +67,15 @@ const router = createBrowserRouter(
   }))
 );
 
+
+
+// Create a client
+const queryClient = new QueryClient()
+
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (<QueryClientProvider client={queryClient}>
+    <RouterProvider router={router} />
+  </QueryClientProvider>);
 };
 
 export default App;
