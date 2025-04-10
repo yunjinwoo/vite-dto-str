@@ -14,7 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fetchWordDefinition, WordDefinition } from "../../features/word/api";
-import { getTotalWordCount, getWordsByPage, updateWordInfo } from "./supaWord";
+import { getTotalWordCount, getAvailableWords, updateWordInfo } from "./supaWord";
 
 const WordGame = () => {
   const location = useLocation();
@@ -32,7 +32,7 @@ const WordGame = () => {
     loading?: boolean;
   }>({ word: "" });
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 9;
+  const itemsPerPage = 15;
 
   //const { setWord, data } = useQueryWordDefinition();
 
@@ -63,7 +63,7 @@ const WordGame = () => {
         setTotalPages(calculatedTotalPages);
 
         // 현재 페이지의 단어 가져오기
-        const words = await getWordsByPage(page, itemsPerPage);
+        const words = await getAvailableWords(page, itemsPerPage);
         const formattedWords = words.map((word) => ({
           word: word.word,
           loading: false,

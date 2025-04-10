@@ -1,7 +1,7 @@
 import { supabase } from "@features/supabase";
 
 
-export async function getAvailableWords(limit_count: number = 15): Promise<{ word: string, word_info: any }[]> {
+export async function getAvailableWords(from: number = 1, to: number = 1): Promise<{ word: string, word_info: any }[]> {
     /*  const { data, error } = await supabase
          .from('words')
          .select('word,word_info')
@@ -13,8 +13,12 @@ export async function getAvailableWords(limit_count: number = 15): Promise<{ wor
 
     let { data, error } = await supabase
         .rpc('get_random_words', {
-            limit_count
+            p_limit:to,
+            p_offset:from
         })
+
+    
+
     if (!data && error && !Array.isArray(data)) throw error;
     return data?.map((row: any) => ({
         word: row?.word,
