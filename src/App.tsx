@@ -14,6 +14,9 @@ import Sudoku from "@pages/sudoku";
 import SweetAlert2 from "@pages/sweetalert2";
 import OverlayKit from "@pages/overlay-kit";
 import StrRegExp from "@pages/StrRegExp";
+import GanttChart from "@pages/gantt";
+import FrappeGanttChart from "@pages/gantt/FrappeGanttChart";
+import Layout from "@widgets/Layout";
 
 const ErrorBoundary = () => {
   return (
@@ -61,6 +64,16 @@ const router = createBrowserRouter([
   {
     path: "/StrRegExp",
     element: <StrRegExp />,
+    errorElement: <ErrorBoundary />
+  },
+  {
+    path: "/gantt",
+    element: <Layout title="Gantt Chart"><GanttChart /></Layout>,
+    errorElement: <ErrorBoundary />
+  },
+  {
+    path: "/gantt/frappe",
+    element: <FrappeGanttChart />,
     errorElement: <ErrorBoundary />
   }
 ]);

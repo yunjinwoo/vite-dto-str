@@ -1,4 +1,4 @@
-import { ArrowDropDownCircleOutlined, BorderOuter } from "@mui/icons-material";
+import { AlignHorizontalLeftOutlined, AlignVerticalTopOutlined, ArrowDropDownCircleOutlined, BorderOuter } from "@mui/icons-material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -56,6 +56,18 @@ export const MainListItems = () => {
       <ListItemButton onClick={() => navigate("/word")}>
         <ListItemIcon>
           <ArrowDropDownCircleOutlined />
+        </ListItemIcon>
+        <ListItemText primary="word" />
+      </ListItemButton>
+      <ListItemButton onClick={() => navigate("/gantt")}>
+        <ListItemIcon>
+          <AlignHorizontalLeftOutlined  />
+        </ListItemIcon>
+        <ListItemText primary="gantt" />
+      </ListItemButton>
+      <ListItemButton onClick={() => navigate("/gantt/frappe")}>
+        <ListItemIcon>
+          <AlignVerticalTopOutlined />
         </ListItemIcon>
         <ListItemText primary="word" />
       </ListItemButton>
