@@ -1,15 +1,21 @@
-import React from 'react';
-import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import './Dropdown.css';
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { SelectChangeEvent } from "@mui/material/Select";
+import React from "react";
+import "./Dropdown.css";
 
 interface DropdownProps {
   label: string;
   options: string[];
   value: string;
-  onChange: (event: React.ChangeEvent<{ value: string; name: string; }>) => void;
+  onChange: (event: SelectChangeEvent) => void;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ label, options, value, onChange }) => {
+const Dropdown: React.FC<DropdownProps> = ({
+  label,
+  options,
+  value,
+  onChange,
+}) => {
   return (
     <FormControl variant="outlined" className="dropdown">
       <InputLabel>{label}</InputLabel>
