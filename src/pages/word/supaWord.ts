@@ -2,28 +2,26 @@ import { supabase } from "@features/supabase";
 
 
 export async function getAvailableWords(from: number = 1, to: number = 1): Promise<{ word: string, word_info: any }[]> {
-    /*  const { data, error } = await supabase
-         .from('words')
-         .select('word,word_info')
-         // used_at이 null 이거나 7일 이상 지난 것
-         .or(`used_at.is.null,used_at.lte.${new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()}`)
-         //.order('random()') // 무작위 정렬
-         //.lte('used_at', new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())
-         .limit(20); // 20개만 가져오기 */
-
-    let { data, error } = await supabase
+    const { data, error } = await supabase
         .rpc('get_random_words', {
-            p_limit:to,
-            p_offset:from
-        })
+            p_limit: to - from + 1,
+            p_offset: from - 1
+        });
 
-    
+    if (error) {
+        console.error('Error getting available words:', error);
+        return [];
+    }
 
-    if (!data && error && !Array.isArray(data)) throw error;
-    return data?.map((row: any) => ({
+    if (!data || !Array.isArray(data)) {
+        console.error('Invalid data format:', data);
+        return [];
+    }
+
+    return data.map((row: any) => ({
         word: row?.word,
         word_info: row?.word_info
-    })) ?? [];
+    }));
 }
 
 
@@ -75,4 +73,41 @@ export async function updateWordInfo(word: string, info: any) {
     } else {
         console.log('업데이트 완료:', data);
     }
+}
+
+export async function getWordsWithInfo(from: number = 1, to: number = 1): Promise<{ word: string, word_info: any }[]> {
+    const { data, error } = await supabase
+        .from('words')
+        .select('word, word_info')
+        .not('word_info', 'is', null)
+        .order('word', { ascending: true })
+        .range(from - 1, to - 1);
+
+    if (error) {
+        console.error('Error getting words with info:', error);
+        return [];
+    }
+
+    if (!data || !Array.isArray(data)) {
+        console.error('Invalid data format:', data);
+        return [];
+    }
+
+    return data.map((row: any) => ({
+        word: row?.word,
+        word_info: row?.word_info
+    }));
+}
+
+export async function getWordsWithInfoCount(): Promise<number> {
+    const { count, error } = await supabase
+        .from('words')
+        .select('*', { count: 'exact', head: true })
+        .not('word_info', 'is', null);
+
+    if (error) {
+        console.error('Error getting words with info count:', error);
+        return 0;
+    }
+    return count || 0;
 }

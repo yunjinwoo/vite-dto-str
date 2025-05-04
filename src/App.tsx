@@ -4,67 +4,67 @@
  * //import "./App.css";
  * */
 
-import Components from "@pages/gpt/components";
-import {
-  QueryClient,
-  QueryClientProvider
-} from "@tanstack/react-query";
-import {
-  ActionFunction,
-  createBrowserRouter,
-  LoaderFunction,
-  RouterProvider,
-} from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import WordGameRoutes from "./pages/word";
+import GptComponents from "@pages/gpt";
+import Community from "@pages/gpt/community";
+import Dashboard from "@pages";
+import Sudoku from "@pages/sudoku";
+import SweetAlert2 from "@pages/sweetalert2";
+import OverlayKit from "@pages/overlay-kit";
+import StrRegExp from "@pages/StrRegExp";
 
-interface RouteCommon {
-  loader?: LoaderFunction;
-  action?: ActionFunction;
-  ErrorBoundary?: React.ComponentType<any>;
-}
+const ErrorBoundary = () => {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold mb-4">404</h1>
+        <p className="text-xl mb-4">페이지를 찾을 수 없습니다.</p>
+        <a href="/" className="text-blue-500 hover:underline">홈으로 돌아가기</a>
+      </div>
+    </div>
+  );
+};
 
-interface IRoute extends RouteCommon {
-  path: string;
-  Element: React.ComponentType<any>;
-}
-
-interface Pages {
-  [key: string]: {
-    default: React.ComponentType<any>;
-  } & RouteCommon;
-}
-
-const pages: Pages = import.meta.glob("./pages/**/*.tsx", { eager: true });
-const routes: IRoute[] = [];
-for (const path of Object.keys(pages)) {
-  const fileName = path.match(/\.\/pages\/(.*)\.tsx$/)?.[1];
-  if (!fileName) {
-    continue;
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Dashboard />,
+    errorElement: <ErrorBoundary />
+  },
+  {
+    path: "/word/*",
+    element: <WordGameRoutes />,
+    errorElement: <ErrorBoundary />
+  },
+  {
+    path: "/gpt/*",
+    element: <GptComponents />,
+    errorElement: <ErrorBoundary />
+  },
+  {
+    path: "/sudoku",
+    element: <Sudoku />,
+    errorElement: <ErrorBoundary />
+  },
+  {
+    path: "/sweetalert2",
+    element: <SweetAlert2 />,
+    errorElement: <ErrorBoundary />
+  },
+  {
+    path: "/overlay-kit",
+    element: <OverlayKit />,
+    errorElement: <ErrorBoundary />
+  },
+  {
+    path: "/StrRegExp",
+    element: <StrRegExp />,
+    errorElement: <ErrorBoundary />
   }
+]);
 
-  const normalizedPathName = fileName.includes("$")
-    ? fileName.replace("$", ":")
-    : fileName.replace(/\/index/, "");
-
-  routes.push({
-    path: fileName === "index" ? "/" : `/${normalizedPathName.toLowerCase()}`,
-    Element: pages[path].default,
-    loader: pages[path]?.loader as LoaderFunction | undefined,
-    action: pages[path]?.action as ActionFunction | undefined,
-    ErrorBoundary: pages[path]?.ErrorBoundary,
-  });
-}
-
-routes.push({ path: "/gpt/components/*", Element: Components });
-
-const router = createBrowserRouter(
-  routes.map(({ Element, ErrorBoundary, ...rest }) => ({
-    ...rest,
-    element: <Element />,
-    ...(ErrorBoundary && { errorElement: <ErrorBoundary /> }),
-  }))
-);
-
-// Create a client
 const queryClient = new QueryClient();
 
 const App = () => {

@@ -14,7 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fetchWordDefinition, WordDefinition } from "../../features/word/api";
-import { getTotalWordCount, getWordsInfo, updateWordInfo } from "./supaWord";
+import { getWordsWithInfo, getWordsWithInfoCount } from "./supaWord";
 import { WordMenu } from "./WordMenu";
 
 const WordInfoGame = () => {
@@ -33,23 +33,15 @@ const WordInfoGame = () => {
     loading?: boolean;
   }>({ word: "" });
   const [totalPages, setTotalPages] = useState(1);
+  const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
   const itemsPerPage = 15;
 
-  //const { setWord, data } = useQueryWordDefinition();
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
   const findWordDefintion = async (word: string) => {
     console.log("findWordDefintion - word", word);
     const definition = await fetchWordDefinition(word);
-    //setWord(word)
     setFindWord({ word, definition, loading: false });
-
-    console.log("findWordDefintion - definition", definition);
-    await updateWordInfo(word, {
-      definition: definition?.meanings,
-      partOfSpeech: "noun",
-      example: "I ate an apple for lunch.",
-    });
-
     setOpen(true);
   };
 
@@ -58,15 +50,16 @@ const WordInfoGame = () => {
       try {
         setLoading(true);
 
-        // 총 단어 수 가져오기
-        const totalCount = await getTotalWordCount();
+        // 단어 정보가 있는 단어들의 총 개수 가져오기
+        const totalCount = await getWordsWithInfoCount();
         const calculatedTotalPages = Math.ceil(totalCount / itemsPerPage);
         setTotalPages(calculatedTotalPages);
 
-        // 현재 페이지의 단어 가져오기
-        const words = await getWordsInfo(page, itemsPerPage);
+        // 단어 정보가 있는 단어들 가져오기
+        const words = await getWordsWithInfo((page - 1) * itemsPerPage + 1, page * itemsPerPage);
         const formattedWords = words.map((word) => ({
           word: word.word,
+          definition: word.word_info,
           loading: false,
         }));
         setGameWords(formattedWords);
@@ -79,6 +72,16 @@ const WordInfoGame = () => {
 
     initializeGame();
   }, [page]);
+
+  // 단어를 첫 글자 기준으로 그룹화
+  const groupedWords = gameWords.reduce((acc, word) => {
+    const firstLetter = word.word.charAt(0).toUpperCase();
+    if (!acc[firstLetter]) {
+      acc[firstLetter] = [];
+    }
+    acc[firstLetter].push(word);
+    return acc;
+  }, {} as Record<string, typeof gameWords>);
 
   if (loading) {
     return (
@@ -101,35 +104,85 @@ const WordInfoGame = () => {
     <Container maxWidth="md" className="mt-8">
       <Paper elevation={3} className="p-8">
         <div className="flex justify-between items-center mb-4">
-          <Typography variant="h5">페이지: {page}</Typography>
+          <Typography variant="h5">단어 정보 페이지: {page}</Typography>
           <WordMenu />
         </div>
 
-        <Grid container spacing={2}>
-          {gameWords.map((word, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card className="cursor-pointer hover:bg-gray-100 transition-colors">
-                <CardContent>
-                  <Typography
-                    variant="h6"
-                    align="center"
-                    gutterBottom
-                    onClick={() => findWordDefintion(word.word)}
-                  >
-                    {word.word}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+        <Box display="flex" justifyContent="center" flexWrap="wrap" gap={1} mb={4}>
+          {alphabet.map((letter) => (
+            <Button
+              key={letter}
+              variant={selectedLetter === letter ? "contained" : "outlined"}
+              color="primary"
+              onClick={() => setSelectedLetter(letter)}
+              sx={{ minWidth: '40px' }}
+            >
+              {letter} ({groupedWords[letter]?.length || 0})
+            </Button>
           ))}
-        </Grid>
+        </Box>
+
+        {selectedLetter ? (
+          groupedWords[selectedLetter] ? (
+            <div className="mb-6">
+              <Typography variant="h6" className="mb-4" color="primary">
+                {selectedLetter}
+              </Typography>
+              <Grid container spacing={2}>
+                {groupedWords[selectedLetter].map((word, index) => (
+                  <Grid item xs={12} sm={6} md={4} key={index}>
+                    <Card className="cursor-pointer hover:bg-gray-100 transition-colors">
+                      <CardContent>
+                        <Typography
+                          variant="h6"
+                          align="center"
+                          gutterBottom
+                          onClick={() => findWordDefintion(word.word)}
+                        >
+                          {word.word}
+                        </Typography>
+                        {word.definition && (
+                          <div className="mt-2">
+                            {word.definition.meanings?.map((meaning: any, idx: number) => (
+                              <div key={idx} className="mt-1">
+                                <Typography variant="subtitle2" color="primary">
+                                  {meaning.partOfSpeech}
+                                </Typography>
+                                <Typography variant="body2">
+                                  {meaning.definitions[0]?.definition}
+                                </Typography>
+                                {meaning.definitions[0]?.example && (
+                                  <Typography variant="caption" color="textSecondary" display="block">
+                                    예: {meaning.definitions[0].example}
+                                  </Typography>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </div>
+          ) : (
+            <Typography variant="h6" align="center" color="textSecondary">
+              {selectedLetter}로 시작하는 단어가 없습니다.
+            </Typography>
+          )
+        ) : (
+          <Typography variant="h6" align="center" color="textSecondary">
+            알파벳을 선택해주세요.
+          </Typography>
+        )}
 
         <Box display="flex" justifyContent="center" mt={4}>
           <Pagination
             count={totalPages}
             page={page}
             onChange={(event, value) => {
-              navigate("/word/home", { state: { page: value } });
+              navigate("/word/info", { state: { page: value } });
             }}
           />
         </Box>
@@ -158,11 +211,7 @@ const WordInfoGame = () => {
                           {meaning.definitions[0]?.definition}
                         </Typography>
                         {meaning.definitions[0]?.example && (
-                          <Typography
-                            variant="caption"
-                            color="textSecondary"
-                            display="block"
-                          >
+                          <Typography variant="caption" color="textSecondary" display="block">
                             예: {meaning.definitions[0].example}
                           </Typography>
                         )}

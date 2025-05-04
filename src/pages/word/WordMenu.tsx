@@ -6,10 +6,7 @@ export const WordMenu = () => {
   return (
     <>
       <Button variant="outlined" onClick={() => navigate("/word")}>
-        홈으로
-      </Button>
-      <Button variant="outlined" onClick={() => navigate("/word/new")}>
-        new
+        word
       </Button>
       <Button variant="outlined" onClick={() => navigate("/word/info")}>
         info

@@ -64,7 +64,7 @@ const WordNewGame = () => {
         setTotalPages(calculatedTotalPages);
 
         // 현재 페이지의 단어 가져오기
-        const words = await getAvailableWords(page, itemsPerPage);
+        const words = await getAvailableWords((page - 1) * itemsPerPage + 1, page * itemsPerPage);
         const formattedWords = words.map((word) => ({
           word: word.word,
           loading: false,
@@ -129,7 +129,7 @@ const WordNewGame = () => {
             count={totalPages}
             page={page}
             onChange={(event, value) => {
-              navigate("/word/home", { state: { page: value } });
+              navigate("/word", { state: { page: value } });
             }}
           />
         </Box>
