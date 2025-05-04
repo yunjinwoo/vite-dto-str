@@ -128,7 +128,7 @@ const WordNewGame = () => {
           <Pagination
             count={totalPages}
             page={page}
-            onChange={(event, value) => {
+            onChange={(event: React.ChangeEvent<unknown>, value: number) => {
               navigate("/word", { state: { page: value } });
             }}
           />
