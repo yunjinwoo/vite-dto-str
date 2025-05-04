@@ -6,7 +6,7 @@ interface DropdownProps {
   label: string;
   options: string[];
   value: string;
-  onChange: (event: React.ChangeEvent<{ value: unknown }>) => void;
+  onChange: (event: React.ChangeEvent<{ value: string }>) => void;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({ label, options, value, onChange }) => {
