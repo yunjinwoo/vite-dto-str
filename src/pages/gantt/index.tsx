@@ -6,6 +6,7 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import moment from 'moment';
 import 'moment/locale/ko';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { SelectChangeEvent } from "@mui/material/Select";
 
 moment.locale('ko');
 const localizer = momentLocalizer(moment);
@@ -133,7 +134,7 @@ const GanttChart: React.FC = () => {
             <Select
               value={selectedTeam}
               label="팀 선택"
-              onChange={(e: React.ChangeEvent<{ value: string }>) => setSelectedTeam(e.target.value)}
+              onChange={(e: SelectChangeEvent) => setSelectedTeam(e.target.value)}
             >
               <MenuItem value="all">전체 팀</MenuItem>
               {teams.map(team => (
@@ -147,7 +148,7 @@ const GanttChart: React.FC = () => {
             <Select
               value={selectedMember}
               label="담당자 선택"
-              onChange={(e: React.ChangeEvent<{ value: string }>) => setSelectedMember(e.target.value)}
+              onChange={(e: SelectChangeEvent) => setSelectedMember(e.target.value)}
             >
               <MenuItem value="all">전체 담당자</MenuItem>
               {members.map(member => (
