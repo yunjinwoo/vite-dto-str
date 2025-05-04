@@ -1,4 +1,4 @@
-import { supabase } from '../../features/supabase';
+import { supabase } from '@features/supabase';
 
 export interface Task {
   id: string;

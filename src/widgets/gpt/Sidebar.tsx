@@ -51,7 +51,7 @@ const Sidebar: React.FC = () => {
       <Alert>32중 여기까지...</Alert>
       <ul>
         {UI_LIST.map((r) => (
-          <li>{r}</li>
+          <li key={r}>{r}</li>
         ))}
       </ul>
     </div>

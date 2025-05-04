@@ -1,0 +1,32 @@
+.documentation-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.documentation-content {
+  margin-top: 2rem;
+  line-height: 1.6;
+}
+
+.documentation-content h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.documentation-content p {
+  margin-bottom: 1rem;
+}
+
+.documentation-content pre {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.documentation-content code {
+  font-family: monospace;
+  font-size: 0.9rem;
+} 
